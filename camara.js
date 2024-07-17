@@ -1,11 +1,11 @@
 
 const scannerContainer = document.getElementById('scanner-container');
 const startButton = document.getElementById('start-button');
-const stopButton = document.getElementById('stop-button');
+const stopButton = document.getElementById('stop-button')
 const saveButton = document.getElementById('save-button');
 const copyButton = document.getElementById('copy-button');
 const barcodeList = document.getElementById('barcode-list');
-const listaguardada=  localStorage.getItem('barcodes') || "";
+
 let isScanning = false;
 
 function startScanner() {
@@ -16,7 +16,7 @@ function startScanner() {
             target: scannerContainer,
         },
         decoder: {
-            readers: ["code_128_reader", "ean_reader", "upc_reader", "code_39_reader"]
+            readers: ["code_128_reader", "ean_reader", "upc_reader", "code_39_reader"] 
         }
     }, function (err) {
         if (err) {
@@ -24,7 +24,7 @@ function startScanner() {
             return;
         }
         console.log("Initialization finished. Ready to start");
-        listaguardada()
+        
         Quagga.start();
     });
 
@@ -47,22 +47,13 @@ function onDetectedHandler(data) {
         listItem.className = 'list-group-item';
         listItem.textContent = code;
         barcodeList.appendChild(listItem);
-        saveBarcodesToLocalStorage(listItem)
+
         alert("agregado a lista" )
         
         setTimeout(() => {
             isScanning = false;
         }, 1000); // Esperar 1 segundo antes de permitir otro escaneo
     }
-}
-function c (listaguardada){
-    listaguardada.forEach( e =>{
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item';
-        listItem.textContent = e;
-        barcodeList.appendChild(listItem);
-
-    })
 }
 function saveBarcodesToLocalStorage(item) {
     listaguardada.appendChild(item)
